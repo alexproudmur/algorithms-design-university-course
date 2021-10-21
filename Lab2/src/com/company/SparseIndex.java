@@ -2,6 +2,7 @@ package com.company;
 
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
@@ -14,7 +15,7 @@ public class SparseIndex {
     public static void main(String[] args) {
         SparseIndex sparseIndex = new SparseIndex();
 
-        String str = "2000";
+        String str = "2001";
         try {
             System.out.println(SparseIndex.search(str));
         } catch (IOException e) {
@@ -75,49 +76,42 @@ public class SparseIndex {
         int hash = getHash(data);
         int blockNumber = TextHelper.getBlockNumber(hash);
         String[] entries = TextHelper.getBlockContent(blockNumber).split(System.lineSeparator());
-        int k = (int) Math.floor(Math.log(entries.length) / Math.log(2));
-        int i = (int) Math.floor(Math.pow(2, k));
-        int Ki = Integer.parseInt(entries[i-1].split(" ")[0]);
+        int[] hashes = new int[entries.length];
+        int i = 0;
 
-
-
-        if (hash > Ki && entries.length > Math.pow(2, k)) {
-            int l = (int) Math.floor(Math.log(entries.length - Math.pow(2, k) + 1) / Math.log(2));
-            i = entries.length + 1 - (int) Math.floor(Math.pow(2, l));
-            int delta = (int) Math.floor(Math.pow(2, l-1));
-            return searchRecursive(hash, entries, i, delta);
-        } else if (hash < Ki) {
-            int delta = (int) Math.floor(Math.pow(2, k-1));
-            return searchRecursive(hash, entries, i, delta);
+        for (String str : entries) {
+            String[] pair = str.split(" ");
+            if (pair.length == 2) {
+                int hashValue = Integer.parseInt(pair[0]);
+                hashes[i] = hashValue;
+                i++;
+            } else {
+                throw new IllegalArgumentException("Not a pair in the file");
+            }
         }
-        return true;
-        //TODO extra block
+        System.out.println(Arrays.toString(hashes));
+        boolean result = SharrSearch.search(hash, hashes);
+        if (result) {
+            return true;
+        }
+
+        entries = TextHelper.getBlockContent(9).split(System.lineSeparator());
+        hashes = new int[entries.length];
+        i = 0;
+
+        for (String str : entries) {
+            String[] pair = str.split(" ");
+            if (pair.length == 2) {
+                int hashValue = Integer.parseInt(pair[0]);
+                hashes[i] = hashValue;
+                i++;
+            } else {
+                throw new IllegalArgumentException("Not a pair in the file");
+            }
+        }
+        return SharrSearch.search(hash, hashes);
     }
 
-    private static boolean searchRecursive(int hash, String[] entries, int i, int delta) {
-        int Ki = Integer.parseInt(entries[i-1].split(" ")[0]);
-        System.out.println(i);
-        if (delta == 0) {
-            count++;
-        }
-        if (count == entries.length) {
-            count = 0;
-            return false;
-        }
-
-        if (hash > Ki) {
-            i = i + (delta / 2 + 1);
-            delta = delta / 2;
-            return searchRecursive(hash, entries, i, delta);
-        } else if (hash < Ki) {
-            i = i - (delta / 2 + 1);
-            delta = delta / 2;
-            return searchRecursive(hash, entries, i, delta);
-        }
-        return true;
-
-        //TODO extra block
-    }
 
 
     private static int getHash(String data) {
