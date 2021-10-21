@@ -9,7 +9,7 @@ import static com.company.SearchHelper.*;
 
 public class StarA {
     private static final Set<Node> closed = new HashSet<>();
-    private static int iterations = 0;
+    //private static int iterations = 0;
 
     public static void main(String[] args) {
         System.out.println("A* Solution:");
@@ -34,10 +34,10 @@ public class StarA {
 
     public static int[][] aStarRecursive(Queue<Node> queue) {
         Node node = queue.poll();
-        System.out.println("--------");
-        System.out.println(closed.size());
-        System.out.println(iterations);
-        System.out.println(queue.size());
+        //System.out.println("--------");
+        //System.out.println(closed.size());
+        //System.out.println(iterations);
+        //System.out.println(queue.size());
         if (closed.contains(node)) {
             return aStarRecursive(queue);
         }
@@ -46,7 +46,7 @@ public class StarA {
             return node.field;
         }
         expand(queue, node, true);
-        iterations++;
+        //iterations++;
         return aStarRecursive(queue);
     }
 }
