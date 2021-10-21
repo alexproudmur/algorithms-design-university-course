@@ -9,14 +9,14 @@ import java.util.TreeSet;
 
 public class SparseIndex {
     public static final int VOLUME = 2000;
-    private static boolean flag = false;
-    private static int count = 0;
 
     public static void main(String[] args) {
-        SparseIndex sparseIndex = new SparseIndex();
-
-        String str = "2000";
-        SparseIndex.addRecord(str);
+        String str = "9852";
+        try {
+            SparseIndex.search(str);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
