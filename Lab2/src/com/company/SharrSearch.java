@@ -46,11 +46,11 @@ public class SharrSearch {
     }
 
     public static boolean searchRecursive(int key, int keyI, int i, int delta, int[] array) {
-        System.out.println(System.lineSeparator() + "---------");
-        System.out.println("key ---- " + key);
-        System.out.println("keyI -----" + keyI);
-        System.out.println("i ---" + i);
-        System.out.println("delta ---" + delta);
+        //System.out.println(System.lineSeparator() + "---------");
+        //System.out.println("key ---- " + key);
+        //System.out.println("keyI -----" + keyI);
+        //System.out.println("i ---" + i);
+        //System.out.println("delta ---" + delta);
 
         if (delta == 0) {
             counterDelta++;

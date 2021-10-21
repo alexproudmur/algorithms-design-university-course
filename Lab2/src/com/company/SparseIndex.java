@@ -15,16 +15,12 @@ public class SparseIndex {
     public static void main(String[] args) {
         SparseIndex sparseIndex = new SparseIndex();
 
-        String str = "2001";
-        try {
-            System.out.println(SparseIndex.search(str));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        String str = "2000";
+        SparseIndex.addRecord(str);
 
     }
 
-    public boolean addRecord(String data) {
+    public static boolean addRecord(String data) {
         int hash = getHash(data);
 
         try {
@@ -40,7 +36,7 @@ public class SparseIndex {
             }
 
             Set<Entry> set = getEntrySet(blockContent.split(System.lineSeparator()));
-            System.out.println(set.size());
+
             if (set.size() >= 2000) {
                 blockNumber = 9;
                 blockContent = TextHelper.getBlockContent(blockNumber);
@@ -112,7 +108,43 @@ public class SparseIndex {
         return SharrSearch.search(hash, hashes);
     }
 
+    public static void delete(String data) throws IOException {
+        int hash = getHash(data);
+        int blockNumber = TextHelper.getBlockNumber(hash);
+        String blockContent = TextHelper.getBlockContent(blockNumber);
+        Set<Entry> set = getEntrySet(blockContent.split(System.lineSeparator()));
+        int i = 0;
 
+        if (set.remove(new Entry(hash, data))) {
+            String[] content = new String[VOLUME];
+
+            for (Entry entry : set) {
+                content[i++] = entry.toString();
+            }
+            for (int j = i; j < content.length; j++) {
+                content[j] = System.lineSeparator();
+            }
+            TextHelper.writeBlock(blockNumber, content);
+            return;
+        }
+        blockContent = TextHelper.getBlockContent(9);
+        set = getEntrySet(blockContent.split(System.lineSeparator()));
+        set.remove(new Entry(hash, data));
+        String[] content = new String[VOLUME];
+
+        for (Entry entry : set) {
+            content[i++] = entry.toString();
+        }
+        for (int j = i; j < content.length; j++) {
+            content[j] = System.lineSeparator();
+        }
+        TextHelper.writeBlock(blockNumber, content);
+    }
+
+    public static void edit(String data, String newData) throws IOException {
+        delete(data);
+        addRecord(newData);
+    }
 
     private static int getHash(String data) {
         return data.hashCode();
