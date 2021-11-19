@@ -11,13 +11,8 @@ public class SparseIndex {
     public static final int VOLUME = 2000;
 
     public static void main(String[] args) {
-        String str = "9852";
-        try {
-            SparseIndex.search(str);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        String str = "2000";
+        SparseIndex.addRecord(str);
     }
 
     public static boolean addRecord(String data) {
