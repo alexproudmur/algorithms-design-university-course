@@ -39,8 +39,7 @@ public class GameTree {
             GameTreeNode[] gameTreeNodes = new GameTreeNode[5];
             for (int i = 0; i < 5; i++) {
                 int hole = i + (maximizing ? 1 : 6);
-                Field field = this.field.move(hole);
-                //field.estimate();
+                Field field = this.field.move(hole, maximizing);
                 gameTreeNodes[i] = new GameTreeNode(this, null, field, hole);
             }
             this.children = gameTreeNodes;

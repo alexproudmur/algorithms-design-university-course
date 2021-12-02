@@ -85,7 +85,7 @@ public class Field {
         }
     }
 
-    public Field move(int holeNumber) {
+    public Field move(int holeNumber, boolean maximizing) {
         Field field = new Field();
         Hole currHole = field.holes[0];
         Hole parentHole = this.holes[0];
@@ -110,19 +110,20 @@ public class Field {
         }
         selected = field.holes[holeNumber-1];
         selected.setCount(0);
-        field.estimate();
+        field.estimate(maximizing);
         return field;
     }
 
-    private void estimate() {
+    private void estimate(boolean maximizing) {
         for (int i = 0; i < 10; i++) {
             if (holes[i].count == 2 || holes[i].count == 4) {
-                if (i > 5) {
+                if (i > 4 && maximizing) {
                     this.maxCount += holes[i].count;
-                } else {
+                    holes[i].count = 0;
+                } else if (i < 5 && !maximizing) {
                     this.minCount += holes[i].count;
+                    holes[i].count = 0;
                 }
-                holes[i].count = 0;
             }
         }
     }

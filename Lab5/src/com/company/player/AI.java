@@ -1,6 +1,5 @@
 package com.company.player;
 
-import com.company.Main;
 import com.company.algo.GameTree;
 import com.company.algo.Minimax;
 import com.company.game.Field;
@@ -15,7 +14,7 @@ public class AI implements Player {
         GameTree gameTree = new GameTree(field, Game.depth);
         minimax.minimax(gameTree.root);
         int holeToMove = minimax.stack.pop().movedHole;
-        return field.move(holeToMove);
+        return field.move(holeToMove, false);
     }
 
     @Override

@@ -12,7 +12,7 @@ public class Human implements Player {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input hole number");
         int hole = scanner.nextInt();
-        return field.move(hole);
+        return field.move(hole, true);
     }
 
     @Override
