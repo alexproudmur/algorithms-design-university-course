@@ -4,7 +4,6 @@ import com.company.player.AI;
 import com.company.player.Human;
 import com.company.player.Player;
 
-import java.util.Arrays;
 
 public class Game {
     public static int depth;
@@ -13,10 +12,17 @@ public class Game {
 
     public Game(String difficulty) {
         switch (difficulty) {
-            case "Low": depth = 2; break;
-            case "Medium": depth = 5; break;
-            case "High": depth = 8; break;
-            default: depth = 3;
+            case "Low":
+                 depth = 2;
+                 break;
+            case "Medium":
+                depth = 5;
+                break;
+            case "High":
+                depth = 8;
+                break;
+            default:
+                depth = 3;
         }
         players[0] = new Human();
         players[1] = new AI();

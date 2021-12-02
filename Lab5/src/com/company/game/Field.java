@@ -1,7 +1,5 @@
 package com.company.game;
 
-import java.util.Arrays;
-
 public class Field {
     public int minCount;
     public int maxCount;
@@ -139,10 +137,7 @@ public class Field {
             sb.append(holes[i].count).append(" ");
         }
 
-        return
-//                "AI count=" + minCount + System.lineSeparator() +
-//                "Your count=" + maxCount + System.lineSeparator() +
-                "Field:" + System.lineSeparator() +
+        return "Field:" + System.lineSeparator() +
                 sb + System.lineSeparator();
     }
 }

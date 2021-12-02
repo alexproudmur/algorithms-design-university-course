@@ -1,6 +1,5 @@
 package com.company.algo;
 
-import com.company.Main;
 import com.company.game.Game;
 
 import java.util.Arrays;
@@ -50,32 +49,7 @@ public class Minimax {
         }
     }
 
-        public int minimax(GameTree.GameTreeNode root) {
-            return minimax(root, false, Game.depth, Integer.MIN_VALUE, Integer.MAX_VALUE);
-        }
-
-
-
-
-
-
-
-
-
-
-//        if (root.children[0].children == null) {
-//
-//            TreeSet<GameTree.GameTreeNode> nodes = new TreeSet<>(Arrays.asList(root.children));
-//            if (maximizing) {
-//                root.movedHole = nodes.last().movedHole;
-//                root.setEstimate(nodes.last().estimate);
-//            } else {
-//                root.movedHole = nodes.first().movedHole;
-//                root.setEstimate(nodes.first().estimate);
-//            }
-//            return root.movedHole;
-//        }
-//
-//        return minimax(root)
-
+    public int minimax(GameTree.GameTreeNode root) {
+        return minimax(root, false, Game.depth, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
+}
