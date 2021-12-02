@@ -4,6 +4,8 @@ import com.company.player.AI;
 import com.company.player.Human;
 import com.company.player.Player;
 
+import java.util.Arrays;
+
 public class Game {
     public static int depth;
     Field field;
@@ -29,6 +31,10 @@ public class Game {
             } else {
                 field = players[1].move(field);
             }
+            players[0].calcCount(field);
+            players[1].calcCount(field);
+            System.out.println("AI count - " + players[1].getCount());
+            System.out.println("Your count - " + players[0].getCount());
             System.out.println(field);
             i++;
         }

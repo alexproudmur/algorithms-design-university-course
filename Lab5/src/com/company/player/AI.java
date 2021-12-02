@@ -7,6 +7,8 @@ import com.company.game.Field;
 import com.company.game.Game;
 
 public class AI implements Player {
+    public int count = 0;
+
     @Override
     public Field move(Field field) {
         Minimax minimax = new Minimax();
@@ -14,5 +16,15 @@ public class AI implements Player {
         minimax.minimax(gameTree.root);
         int holeToMove = minimax.stack.pop().movedHole;
         return field.move(holeToMove);
+    }
+
+    @Override
+    public void calcCount(Field field) {
+        count += field.minCount;
+    }
+
+    @Override
+    public int getCount() {
+        return count;
     }
 }

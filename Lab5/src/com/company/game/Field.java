@@ -10,16 +10,16 @@ public class Field {
     public Field() {
         this.holes = new Hole[10];
 
-        holes[0] = new Hole(1);
-        holes[1] = new Hole(2);
-        holes[2] = new Hole(3);
-        holes[3] = new Hole(4);
+        holes[0] = new Hole(5);
+        holes[1] = new Hole(5);
+        holes[2] = new Hole(5);
+        holes[3] = new Hole(5);
         holes[4] = new Hole(5);
-        holes[5] = new Hole(6);
-        holes[6] = new Hole(7);
-        holes[7] = new Hole(8);
-        holes[8] = new Hole(9);
-        holes[9] = new Hole(10);
+        holes[5] = new Hole(5);
+        holes[6] = new Hole(5);
+        holes[7] = new Hole(5);
+        holes[8] = new Hole(5);
+        holes[9] = new Hole(5);
 
         holes[0].setPrevNext(holes[5], holes[1]);
         holes[1].setPrevNext(holes[0], holes[2]);
@@ -89,7 +89,7 @@ public class Field {
         Field field = new Field();
         Hole currHole = field.holes[0];
         Hole parentHole = this.holes[0];
-        for (int i = 1; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             currHole.setCount(parentHole.getCount());
             currHole = currHole.next;
             parentHole = parentHole.next;
@@ -110,14 +110,14 @@ public class Field {
         }
         selected = field.holes[holeNumber-1];
         selected.setCount(0);
-        estimate();
+        field.estimate();
         return field;
     }
 
     private void estimate() {
         for (int i = 0; i < 10; i++) {
             if (holes[i].count == 2 || holes[i].count == 4) {
-                if (i < 5) {
+                if (i > 5) {
                     this.maxCount += holes[i].count;
                 } else {
                     this.minCount += holes[i].count;
@@ -138,10 +138,10 @@ public class Field {
             sb.append(holes[i].count).append(" ");
         }
 
-        return System.lineSeparator() +
-                "AI count=" + minCount + System.lineSeparator() +
-                "Your count=" + maxCount + System.lineSeparator() +
+        return
+//                "AI count=" + minCount + System.lineSeparator() +
+//                "Your count=" + maxCount + System.lineSeparator() +
                 "Field:" + System.lineSeparator() +
-                sb;
+                sb + System.lineSeparator();
     }
 }
