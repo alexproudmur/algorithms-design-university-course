@@ -27,6 +27,7 @@ public class Game {
         players[0] = new Human();
         players[1] = new AI();
         field = new Field();
+        System.out.println(field);
     }
 
     public void start() {
