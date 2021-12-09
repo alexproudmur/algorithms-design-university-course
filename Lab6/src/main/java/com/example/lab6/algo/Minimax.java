@@ -27,10 +27,10 @@ public class Minimax {
                 double eval = minimax(child, false, depth - 1);
                 maxEval = Math.max(maxEval, eval);
             }
-//            if (root.children != null) {
-//                TreeSet<GameTree.GameTreeNode> nodes = new TreeSet<>(Arrays.asList(root.children));
-//                deque.push(nodes.last());
-//            }
+            if (root.children != null) {
+                TreeSet<GameTree.GameTreeNode> nodes = new TreeSet<>(Arrays.asList(root.children));
+                deque.add(nodes.last());
+            }
             return maxEval;
         } else {
             double minEval = Integer.MAX_VALUE;
@@ -38,19 +38,17 @@ public class Minimax {
                 double eval = minimax(child, true, depth - 1);
                 minEval = Math.min(minEval, eval);
             }
-//            if (root.children != null) {
-//                TreeSet<GameTree.GameTreeNode> nodes = new TreeSet<>(Arrays.asList(root.children));
-//                deque.push(nodes.first());
-//            }
+            if (root.children != null) {
+                TreeSet<GameTree.GameTreeNode> nodes = new TreeSet<>(Arrays.asList(root.children));
+                deque.add(nodes.first());
+            }
             return minEval;
         }
     }
 
     public Strategy getStrategy() {
-        TreeSet<GameTree.GameTreeNode> set = new TreeSet<>();
-        for (GameTree.GameTreeNode child : deque.last().children) {
-            set.add(child);
-        }
-        return set.first().strategy;
+        TreeSet<GameTree.GameTreeNode> set = new TreeSet<>(Comparator.comparingInt(o -> o.gameState.aiCount));
+        set.addAll(Arrays.asList(deque.last().children));
+        return set.last().strategy;
     }
 }
