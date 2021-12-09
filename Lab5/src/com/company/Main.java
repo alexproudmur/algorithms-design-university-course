@@ -1,7 +1,6 @@
 package com.company;
 
 import com.company.game.Game;
-
 import java.util.Scanner;
 
 public class Main {
